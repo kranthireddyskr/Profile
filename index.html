@@ -3,16 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kranthi Reddy Sanikommu - Senior .NET Developer</title>
+  <title>Kranthi Reddy - Senior .NET Developer</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+  <!-- Animated Background -->
+  <div class="background-animation">
+    <div class="gradient-orb orb-1"></div>
+    <div class="gradient-orb orb-2"></div>
+    <div class="gradient-orb orb-3"></div>
+  </div>
+
   <!-- Navigation -->
   <nav class="navbar">
     <div class="nav-container">
       <div class="nav-logo">
-        <a href="#home" class="logo-text">KR</a>
+        <div class="logo-3d">KR</div>
       </div>
       <div class="nav-menu" id="navMenu">
         <a href="#home" class="nav-link active">Home</a>
@@ -20,7 +27,6 @@
         <a href="#experience" class="nav-link">Experience</a>
         <a href="#skills" class="nav-link">Skills</a>
         <a href="#projects" class="nav-link">Projects</a>
-        <a href="#education" class="nav-link">Education</a>
         <a href="#contact" class="nav-link">Contact</a>
       </div>
       <div class="hamburger" id="hamburger">
@@ -31,122 +37,145 @@
     </div>
   </nav>
 
-  <!-- Hero Section -->
+  <!-- Hero Section with Advanced Animation -->
   <section id="home" class="hero">
     <div class="hero-content">
       <div class="hero-text">
-        <h1 class="fade-in">Kranthi Reddy Sanikommu</h1>
-        <p class="subtitle fade-in" style="animation-delay: 0.2s">Senior .NET Developer | Full Stack Engineer</p>
-        <p class="description fade-in" style="animation-delay: 0.4s">Building scalable cloud-native solutions with C#, .NET, and Azure</p>
-        <div class="hero-buttons fade-in" style="animation-delay: 0.6s">
-          <a href="#contact" class="btn btn-primary">Get In Touch</a>
-          <a href="https://github.com/kranthireddyskr" target="_blank" class="btn btn-secondary">View GitHub</a>
+        <h1 class="glitch" data-text="Kranthi Reddy">Kranthi Reddy</h1>
+        <p class="subtitle neon-text">Senior .NET Developer | Full Stack Engineer</p>
+        <p class="description tech-glow">Building enterprise-scale cloud-native solutions</p>
+
+        <div class="tech-stats">
+          <div class="tech-stat">
+            <span class="stat-number">3+</span>
+            <span class="stat-label">Years</span>
+          </div>
+          <div class="tech-stat">
+            <span class="stat-number">8+</span>
+            <span class="stat-label">Microservices</span>
+          </div>
+          <div class="tech-stat">
+            <span class="stat-number">60%</span>
+            <span class="stat-label">Performance</span>
+          </div>
+        </div>
+
+        <div class="hero-buttons">
+          <a href="#contact" class="btn btn-glow">Get In Touch</a>
+          <a href="https://github.com/kranthireddyskr" target="_blank" class="btn btn-glass">GitHub</a>
         </div>
       </div>
-      <div class="hero-links fade-in" style="animation-delay: 0.8s">
-        <a href="mailto:kranthireddy2000@outlook.com" class="social-link" title="Email">
-          <i class="fas fa-envelope"></i>
-        </a>
-        <a href="tel:+19402994787" class="social-link" title="Call">
-          <i class="fas fa-phone"></i>
-        </a>
-        <a href="https://www.linkedin.com/in/kranthi-reddy-960ba7149/" target="_blank" class="social-link" title="LinkedIn">
-          <i class="fab fa-linkedin-in"></i>
-        </a>
-        <a href="https://github.com/kranthireddyskr" target="_blank" class="social-link" title="GitHub">
-          <i class="fab fa-github"></i>
-        </a>
+      <div class="hero-visual">
+        <div class="floating-cube"></div>
+        <div class="floating-elements">
+          <span class="element">C#</span>
+          <span class="element">.NET</span>
+          <span class="element">Azure</span>
+          <span class="element">React</span>
+        </div>
       </div>
     </div>
+
     <div class="scroll-indicator">
-      <span>Scroll to explore</span>
-      <i class="fas fa-chevron-down"></i>
+      <div class="scroll-dot"></div>
+      <p>Scroll to explore</p>
     </div>
   </section>
 
   <!-- About Section -->
   <section id="about" class="about">
     <div class="container">
-      <h2 class="section-title">About Me</h2>
-      <div class="about-content">
-        <div class="about-text">
-          <p>Results-driven Senior .NET Developer with 3+ years of comprehensive experience in designing, developing, and deploying cloud-native microservices using C#, .NET Core, and Microsoft Azure.</p>
-          <p>Proven expertise in full-stack development with Angular, database optimization, CI/CD pipelines, and building highly scalable solutions for enterprise environments. Passionate about clean code, system design, and mentoring junior engineers.</p>
-          <div class="stats">
-            <div class="stat-item">
-              <h3>3+</h3>
-              <p>Years Experience</p>
-            </div>
-            <div class="stat-item">
-              <h3>8+</h3>
-              <p>Microservices Built</p>
-            </div>
-            <div class="stat-item">
-              <h3>60%</h3>
-              <p>Performance Gain</p>
-            </div>
+      <h2 class="section-title">
+        <span class="title-text">About Me</span>
+        <div class="title-underline"></div>
+      </h2>
+
+      <div class="about-grid">
+        <div class="about-card glass-effect">
+          <div class="card-icon">
+            <i class="fas fa-brain"></i>
           </div>
+          <h3>Senior Developer</h3>
+          <p>3+ years architecting cloud-native microservices using C#, .NET Core, and Microsoft Azure.</p>
+        </div>
+
+        <div class="about-card glass-effect">
+          <div class="card-icon">
+            <i class="fas fa-rocket"></i>
+          </div>
+          <h3>Full Stack Expert</h3>
+          <p>Expertise in Angular frontend, database optimization, and building highly scalable enterprise solutions.</p>
+        </div>
+
+        <div class="about-card glass-effect">
+          <div class="card-icon">
+            <i class="fas fa-code"></i>
+          </div>
+          <h3>Clean Code Advocate</h3>
+          <p>Passionate about clean architecture, system design, and mentoring junior engineers.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Skills Section -->
+  <!-- Skills Section with Interactive Cards -->
   <section id="skills" class="skills">
     <div class="container">
-      <h2 class="section-title">Technical Skills</h2>
+      <h2 class="section-title">
+        <span class="title-text">Technical Arsenal</span>
+        <div class="title-underline"></div>
+      </h2>
+
       <div class="skills-grid">
-        <div class="skill-card">
-          <div class="skill-icon">
+        <div class="skill-card-advanced glass-effect">
+          <div class="skill-header">
             <i class="fas fa-code"></i>
+            <h3>Languages</h3>
           </div>
-          <h3>Languages & Frameworks</h3>
-          <div class="skill-tags">
-            <span class="tag">C#</span>
-            <span class="tag">.NET 8</span>
-            <span class="tag">ASP.NET Core</span>
-            <span class="tag">Entity Framework</span>
-            <span class="tag">TypeScript</span>
+          <div class="skill-list">
+            <div class="skill-item"><span>C#</span><div class="skill-bar"><div class="skill-fill" style="width: 95%"></div></div></div>
+            <div class="skill-item"><span>.NET 8</span><div class="skill-bar"><div class="skill-fill" style="width: 95%"></div></div></div>
+            <div class="skill-item"><span>ASP.NET Core</span><div class="skill-bar"><div class="skill-fill" style="width: 90%"></div></div></div>
+            <div class="skill-item"><span>TypeScript</span><div class="skill-bar"><div class="skill-fill" style="width: 85%"></div></div></div>
           </div>
         </div>
 
-        <div class="skill-card">
-          <div class="skill-icon">
+        <div class="skill-card-advanced glass-effect">
+          <div class="skill-header">
             <i class="fas fa-cloud"></i>
+            <h3>Cloud & DevOps</h3>
           </div>
-          <h3>Cloud & DevOps</h3>
-          <div class="skill-tags">
-            <span class="tag">Azure</span>
-            <span class="tag">Docker</span>
-            <span class="tag">Azure DevOps</span>
-            <span class="tag">CI/CD</span>
-            <span class="tag">Microservices</span>
+          <div class="skill-list">
+            <div class="skill-item"><span>Azure</span><div class="skill-bar"><div class="skill-fill" style="width: 92%"></div></div></div>
+            <div class="skill-item"><span>Docker</span><div class="skill-bar"><div class="skill-fill" style="width: 88%"></div></div></div>
+            <div class="skill-item"><span>CI/CD Pipelines</span><div class="skill-bar"><div class="skill-fill" style="width: 90%"></div></div></div>
+            <div class="skill-item"><span>Microservices</span><div class="skill-bar"><div class="skill-fill" style="width: 92%"></div></div></div>
           </div>
         </div>
 
-        <div class="skill-card">
-          <div class="skill-icon">
+        <div class="skill-card-advanced glass-effect">
+          <div class="skill-header">
             <i class="fas fa-palette"></i>
+            <h3>Frontend</h3>
           </div>
-          <h3>Frontend</h3>
-          <div class="skill-tags">
-            <span class="tag">Angular 4-8</span>
-            <span class="tag">JavaScript</span>
-            <span class="tag">HTML5/CSS3</span>
-            <span class="tag">Responsive Design</span>
+          <div class="skill-list">
+            <div class="skill-item"><span>Angular</span><div class="skill-bar"><div class="skill-fill" style="width: 88%"></div></div></div>
+            <div class="skill-item"><span>JavaScript</span><div class="skill-bar"><div class="skill-fill" style="width: 85%"></div></div></div>
+            <div class="skill-item"><span>HTML5/CSS3</span><div class="skill-bar"><div class="skill-fill" style="width: 90%"></div></div></div>
+            <div class="skill-item"><span>Responsive Design</span><div class="skill-bar"><div class="skill-fill" style="width: 92%"></div></div></div>
           </div>
         </div>
 
-        <div class="skill-card">
-          <div class="skill-icon">
+        <div class="skill-card-advanced glass-effect">
+          <div class="skill-header">
             <i class="fas fa-database"></i>
+            <h3>Databases</h3>
           </div>
-          <h3>Databases & Tools</h3>
-          <div class="skill-tags">
-            <span class="tag">SQL Server</span>
-            <span class="tag">RabbitMQ</span>
-            <span class="tag">Git/GitHub</span>
-            <span class="tag">Agile/Scrum</span>
+          <div class="skill-list">
+            <div class="skill-item"><span>SQL Server</span><div class="skill-bar"><div class="skill-fill" style="width: 93%"></div></div></div>
+            <div class="skill-item"><span>RabbitMQ</span><div class="skill-bar"><div class="skill-fill" style="width: 87%"></div></div></div>
+            <div class="skill-item"><span>Entity Framework</span><div class="skill-bar"><div class="skill-fill" style="width: 90%"></div></div></div>
+            <div class="skill-item"><span>Git/GitHub</span><div class="skill-bar"><div class="skill-fill" style="width: 95%"></div></div></div>
           </div>
         </div>
       </div>
@@ -156,111 +185,133 @@
   <!-- Experience Section -->
   <section id="experience" class="experience">
     <div class="container">
-      <h2 class="section-title">Professional Experience</h2>
-      <div class="timeline">
-        <div class="timeline-item">
-          <div class="timeline-marker"></div>
-          <div class="timeline-content">
+      <h2 class="section-title">
+        <span class="title-text">Professional Journey</span>
+        <div class="title-underline"></div>
+      </h2>
+
+      <div class="experience-grid">
+        <div class="experience-card glass-effect">
+          <div class="experience-header">
             <h3>Senior .NET Developer</h3>
-            <p class="company">Caliber Home Loans / NewRez — Coppell, TX</p>
-            <p class="date">March 2023 — Present</p>
-            <p class="description">Driving enterprise-scale initiatives spanning Compliance, E-Signing, and OCR Vendor Integration systems</p>
-            <ul class="achievements">
-              <li>Designed and developed 8 cloud-native microservices using .NET 8 and ASP.NET Core, integrated with external vendors for document e-signing and OCR automation</li>
-              <li>Architected a robust OCR processing pipeline handling multi-file ingestion, page-level mapping, and vendor communication through asynchronous services and Azure Blob Storage</li>
-              <li>Enhanced performance of legacy SQL reporting systems by refactoring complex stored procedures, reducing report generation latency by over 60%</li>
-              <li>Implemented RabbitMQ message queues to decouple services, improving reliability and throughput of document processing transactions</li>
-              <li>Deployed and managed applications on Azure App Services, utilizing Azure Functions, Key Vault, and Application Insights for observability</li>
-              <li>Leveraged Azure DevOps Pipelines to configure CI/CD automation across multiple environments with staged deployments</li>
-              <li>Mentored junior developers, enforced SOLID principles, and contributed to internal coding guidelines</li>
-            </ul>
+            <span class="company-badge">Caliber Home Loans / NewRez</span>
           </div>
+          <p class="experience-date">March 2023 — Present</p>
+          <p class="experience-desc">Driving enterprise-scale initiatives spanning Compliance, E-Signing, and OCR systems</p>
+          <ul class="experience-achievements">
+            <li>Designed 8 cloud-native microservices with .NET 8 & ASP.NET Core</li>
+            <li>Reduced report latency by 60% through SQL optimization</li>
+            <li>Implemented RabbitMQ for service decoupling & reliability</li>
+            <li>Mentored junior developers on SOLID principles</li>
+          </ul>
         </div>
 
-        <div class="timeline-item">
-          <div class="timeline-marker"></div>
-          <div class="timeline-content">
+        <div class="experience-card glass-effect">
+          <div class="experience-header">
             <h3>.NET Developer</h3>
-            <p class="company">Sparks Foundation — India</p>
-            <p class="date">Sep 2020 — Oct 2020</p>
-            <ul class="achievements">
-              <li>Designed and deployed web applications using ASP.NET, C#, and MVC framework</li>
-              <li>Integrated third-party APIs including payment gateways and authentication services</li>
-              <li>Optimized SQL databases with schema design, indexing, and query optimization</li>
-              <li>Collaborated with cross-functional teams in Agile/Scrum environment</li>
-            </ul>
+            <span class="company-badge">Sparks Foundation</span>
           </div>
+          <p class="experience-date">Sep 2020 — Oct 2020</p>
+          <p class="experience-desc">Full-stack web application development</p>
+          <ul class="experience-achievements">
+            <li>Built ASP.NET MVC applications</li>
+            <li>Integrated third-party payment APIs</li>
+            <li>Optimized database schemas & queries</li>
+            <li>Collaborated in Agile environment</li>
+          </ul>
         </div>
 
-        <div class="timeline-item">
-          <div class="timeline-marker"></div>
-          <div class="timeline-content">
+        <div class="experience-card glass-effect">
+          <div class="experience-header">
             <h3>Data Science Intern</h3>
-            <p class="company">Smart Bridge — Hyderabad, India</p>
-            <p class="date">May 2019 — Jun 2019</p>
-            <ul class="achievements">
-              <li>Built supervised and unsupervised ML models using Python</li>
-              <li>Handled data preprocessing, labeling, and feature engineering</li>
-              <li>Collaborated with data scientists on interdisciplinary projects</li>
-            </ul>
+            <span class="company-badge">Smart Bridge</span>
           </div>
+          <p class="experience-date">May 2019 — Jun 2019</p>
+          <p class="experience-desc">Machine learning & data engineering</p>
+          <ul class="experience-achievements">
+            <li>Built ML models using Python</li>
+            <li>Handled data preprocessing & labeling</li>
+            <li>Feature engineering & analysis</li>
+            <li>Interdisciplinary project collaboration</li>
+          </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Projects Section -->
+  <!-- Featured Projects -->
   <section id="projects" class="projects">
     <div class="container">
-      <h2 class="section-title">Featured Projects</h2>
-      <div class="projects-grid">
-        <div class="project-card">
-          <div class="project-header">
-            <h3>Algorithmic Trading System</h3>
-            <a href="https://github.com/kranthireddyskr/trading-system" target="_blank" class="project-link">
-              <i class="fab fa-github"></i>
-            </a>
+      <h2 class="section-title">
+        <span class="title-text">Featured Projects</span>
+        <div class="title-underline"></div>
+      </h2>
+
+      <div class="project-showcase glass-effect">
+        <div class="project-content">
+          <h3 class="project-title">Algorithmic Trading System</h3>
+          <p class="project-type">Production-Grade Trading Platform</p>
+          <p class="project-description">
+            Event-driven day trading system with live execution, paper trading, and backtesting across multiple strategies.
+          </p>
+
+          <div class="tech-stack">
+            <span class="tech">Python</span>
+            <span class="tech">Docker</span>
+            <span class="tech">TimescaleDB</span>
+            <span class="tech">WebSocket</span>
+            <span class="tech">Flask</span>
           </div>
-          <p class="project-description">Production-style day trading platform with event-driven architecture</p>
-          <div class="project-tech">
-            <span class="tech-tag">Python</span>
-            <span class="tech-tag">Docker</span>
-            <span class="tech-tag">TimescaleDB</span>
-            <span class="tech-tag">WebSocket</span>
-            <span class="tech-tag">Flask</span>
-          </div>
+
           <ul class="project-features">
-            <li>Supports live trading, paper execution, and backtesting across multiple strategies</li>
-            <li>Containerized with Docker and docker-compose, using AWS Secrets Manager for credential management</li>
-            <li>Real-time market data ingestion via Alpaca WebSocket with automatic reconnect fallback</li>
-            <li>Risk layer with drawdown monitoring, correlation checks, and position limits</li>
+            <li>Real-time market data via Alpaca WebSocket</li>
+            <li>Containerized with Docker & docker-compose</li>
+            <li>Risk management with drawdown monitoring</li>
+            <li>AWS Secrets Manager integration</li>
           </ul>
-          <a href="https://github.com/kranthireddyskr/trading-system" target="_blank" class="btn btn-secondary">View Project</a>
+
+          <a href="https://github.com/kranthireddyskr/trading-system" target="_blank" class="btn btn-glow">
+            <i class="fab fa-github"></i> View on GitHub
+          </a>
+        </div>
+        <div class="project-visual">
+          <div class="code-block">
+            <div class="code-line"><span class="code-keyword">class</span> <span class="code-class">TradingEngine</span></div>
+            <div class="code-line"><span class="code-keyword">def</span> <span class="code-function">execute_trade</span>():</div>
+            <div class="code-line indent">market_data = <span class="code-function">fetch_live_data</span>()</div>
+            <div class="code-line indent"><span class="code-keyword">if</span> strategy.validate():</div>
+            <div class="code-line indent-2">execute_order()</div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Education Section -->
+  <!-- Education -->
   <section id="education" class="education">
     <div class="container">
-      <h2 class="section-title">Education</h2>
+      <h2 class="section-title">
+        <span class="title-text">Education</span>
+        <div class="title-underline"></div>
+      </h2>
+
       <div class="education-grid">
-        <div class="education-card">
+        <div class="education-card glass-effect">
           <div class="education-icon">
             <i class="fas fa-graduation-cap"></i>
           </div>
           <h3>Master of Science in Computer Science</h3>
           <p class="school">University of North Texas, Denton, TX</p>
-          <p class="gpa">GPA: 3.8 / 4.0</p>
+          <div class="gpa-badge">GPA: 3.8 / 4.0</div>
         </div>
-        <div class="education-card">
+
+        <div class="education-card glass-effect">
           <div class="education-icon">
             <i class="fas fa-graduation-cap"></i>
           </div>
           <h3>Bachelor of Technology in Computer Science</h3>
           <p class="school">GITAM University, India</p>
-          <p class="gpa">GPA: 8.4 / 10</p>
+          <div class="gpa-badge">GPA: 8.4 / 10</div>
         </div>
       </div>
     </div>
@@ -269,29 +320,52 @@
   <!-- Contact Section -->
   <section id="contact" class="contact">
     <div class="container">
-      <h2 class="section-title">Get In Touch</h2>
-      <p class="contact-intro">Let's work together! Feel free to reach out through any of these channels.</p>
-      <div class="contact-methods">
-        <a href="mailto:kranthireddy2000@outlook.com" class="contact-card">
-          <i class="fas fa-envelope"></i>
+      <h2 class="section-title">
+        <span class="title-text">Let's Connect</span>
+        <div class="title-underline"></div>
+      </h2>
+
+      <div class="contact-grid">
+        <a href="mailto:kranthireddy2000@outlook.com" class="contact-card glass-effect hover-glow">
+          <div class="contact-icon">
+            <i class="fas fa-envelope"></i>
+          </div>
           <h3>Email</h3>
           <p>kranthireddy2000@outlook.com</p>
+          <div class="contact-arrow">→</div>
         </a>
-        <a href="tel:+19402994787" class="contact-card">
-          <i class="fas fa-phone"></i>
+
+        <a href="tel:+19402994787" class="contact-card glass-effect hover-glow">
+          <div class="contact-icon">
+            <i class="fas fa-phone"></i>
+          </div>
           <h3>Phone</h3>
           <p>+1 (940) 299-4787</p>
+          <div class="contact-arrow">→</div>
         </a>
-        <a href="https://www.linkedin.com/in/kranthi-reddy-960ba7149/" target="_blank" class="contact-card">
-          <i class="fab fa-linkedin-in"></i>
+
+        <a href="https://www.linkedin.com/in/kranthi-reddy-960ba7149/" target="_blank" class="contact-card glass-effect hover-glow">
+          <div class="contact-icon">
+            <i class="fab fa-linkedin-in"></i>
+          </div>
           <h3>LinkedIn</h3>
           <p>kranthi-reddy-960ba7149</p>
+          <div class="contact-arrow">→</div>
         </a>
-        <a href="https://github.com/kranthireddyskr" target="_blank" class="contact-card">
-          <i class="fab fa-github"></i>
+
+        <a href="https://github.com/kranthireddyskr" target="_blank" class="contact-card glass-effect hover-glow">
+          <div class="contact-icon">
+            <i class="fab fa-github"></i>
+          </div>
           <h3>GitHub</h3>
           <p>kranthireddyskr</p>
+          <div class="contact-arrow">→</div>
         </a>
+      </div>
+
+      <div class="cta-section">
+        <p>Ready to discuss your next project?</p>
+        <a href="mailto:kranthireddy2000@outlook.com" class="btn btn-large btn-glow">Send Me a Message</a>
       </div>
     </div>
   </section>
@@ -299,11 +373,19 @@
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
-      <p>&copy; 2024 Kranthi Reddy Sanikommu. All rights reserved.</p>
-      <div class="footer-links">
-        <a href="https://www.linkedin.com/in/kranthi-reddy-960ba7149/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-        <a href="https://github.com/kranthireddyskr" target="_blank"><i class="fab fa-github"></i></a>
-        <a href="mailto:kranthireddy2000@outlook.com"><i class="fas fa-envelope"></i></a>
+      <div class="footer-content">
+        <p>&copy; 2024 Kranthi Reddy Sanikommu. All rights reserved.</p>
+        <div class="social-links">
+          <a href="https://www.linkedin.com/in/kranthi-reddy-960ba7149/" target="_blank" class="social-icon">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+          <a href="https://github.com/kranthireddyskr" target="_blank" class="social-icon">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="mailto:kranthireddy2000@outlook.com" class="social-icon">
+            <i class="fas fa-envelope"></i>
+          </a>
+        </div>
       </div>
     </div>
   </footer>
