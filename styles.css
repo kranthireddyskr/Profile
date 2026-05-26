@@ -530,10 +530,8 @@ body::before {
   box-shadow: 0 0 20px rgba(0, 217, 255, 0.1);
 }
 
-.element:nth-child(1) { top: 5%; left: 0%; animation-delay: 0s; }
-.element:nth-child(2) { top: 65%; right: 5%; animation-delay: 0.8s; }
-.element:nth-child(3) { bottom: 10%; left: 15%; animation-delay: 1.6s; }
-.element:nth-child(4) { bottom: 20%; right: 10%; animation-delay: 2.4s; }
+.element:nth-child(1) { top: 20%; left: 5%; animation-delay: 0s; }
+.element:nth-child(2) { bottom: 20%; right: 10%; animation-delay: 1.2s; }
 
 @keyframes element-smooth {
   0%, 100% {
