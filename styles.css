@@ -5,14 +5,14 @@
 }
 
 :root {
-  --primary: #00d9ff;
-  --secondary: #0099ff;
-  --accent: #ff006e;
-  --dark-bg: #0a0e27;
-  --card-bg: rgba(255, 255, 255, 0.05);
-  --text-primary: #ffffff;
-  --text-secondary: #b0b8d4;
-  --glow: #00d9ff;
+  --primary: #e8dcc4;
+  --secondary: #f0e5d8;
+  --accent: #d4a574;
+  --dark-bg: #0d0d0d;
+  --card-bg: rgba(232, 220, 196, 0.05);
+  --text-primary: #f5f1e8;
+  --text-secondary: #b8b0a0;
+  --glow: #e8dcc4;
 }
 
 html {
@@ -28,6 +28,7 @@ body {
   position: relative;
 }
 
+/* Tech background lines */
 body::before {
   content: '';
   position: fixed;
@@ -36,21 +37,23 @@ body::before {
   width: 100%;
   height: 100%;
   background-image:
-    linear-gradient(0deg, transparent 24%, rgba(0, 217, 255, 0.05) 25%, rgba(0, 217, 255, 0.05) 26%, transparent 27%, transparent 74%, rgba(0, 217, 255, 0.05) 75%, rgba(0, 217, 255, 0.05) 76%, transparent 77%, transparent),
-    linear-gradient(90deg, transparent 24%, rgba(0, 217, 255, 0.05) 25%, rgba(0, 217, 255, 0.05) 26%, transparent 27%, transparent 74%, rgba(0, 217, 255, 0.05) 75%, rgba(0, 217, 255, 0.05) 76%, transparent 77%, transparent);
-  background-size: 80px 80px;
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(232, 220, 196, 0.02) 2px,
+      rgba(232, 220, 196, 0.02) 4px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 2px,
+      rgba(232, 220, 196, 0.02) 2px,
+      rgba(232, 220, 196, 0.02) 4px
+    );
+  background-size: 100px 100px, 100px 100px;
   z-index: -1;
   pointer-events: none;
-  animation: grid-move 20s linear infinite;
-}
-
-@keyframes grid-move {
-  0% {
-    background-position: 0 0;
-  }
-  100% {
-    background-position: 80px 80px;
-  }
 }
 
 .container {
@@ -67,76 +70,83 @@ body::before {
   width: 100%;
   height: 100%;
   z-index: -1;
-  background: linear-gradient(-45deg, #0a0e27 0%, #16213e 25%, #0f3460 50%, #1a1a3e 75%, #0d0221 100%);
-  background-size: 400% 400%;
-  animation: gradient-shift 15s ease infinite;
+  background: linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 50%, #0d0d0d 100%);
   overflow: hidden;
 }
 
-@keyframes gradient-shift {
+.background-animation::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image:
+    linear-gradient(0deg, transparent 24%, rgba(232, 220, 196, 0.03) 25%, rgba(232, 220, 196, 0.03) 26%, transparent 27%, transparent 74%, rgba(232, 220, 196, 0.03) 75%, rgba(232, 220, 196, 0.03) 76%, transparent 77%, transparent),
+    linear-gradient(90deg, transparent 24%, rgba(232, 220, 196, 0.03) 25%, rgba(232, 220, 196, 0.03) 26%, transparent 27%, transparent 74%, rgba(232, 220, 196, 0.03) 75%, rgba(232, 220, 196, 0.03) 76%, transparent 77%, transparent);
+  background-size: 60px 60px;
+  animation: grid-move 30s linear infinite;
+}
+
+@keyframes grid-move {
   0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
+    background-position: 0 0;
   }
   100% {
-    background-position: 0% 50%;
+    background-position: 60px 60px;
   }
 }
 
 .gradient-orb {
   position: absolute;
   border-radius: 50%;
-  filter: blur(120px);
-  opacity: 0.2;
+  filter: blur(100px);
+  opacity: 0.15;
 }
 
 .orb-1 {
   width: 600px;
   height: 600px;
-  background: radial-gradient(circle at 30% 30%, #00d9ff, transparent 70%);
-  top: -15%;
+  background: radial-gradient(circle at 30% 30%, #d4a574, transparent 70%);
+  top: -10%;
   left: -15%;
-  animation: orb-float 28s ease-in-out infinite;
+  animation: orb-float 35s ease-in-out infinite;
 }
 
 .orb-2 {
   width: 500px;
   height: 500px;
-  background: radial-gradient(circle at 60% 40%, #ff006e, transparent 70%);
-  top: 25%;
+  background: radial-gradient(circle at 60% 40%, #e8dcc4, transparent 70%);
+  top: 35%;
   right: -8%;
-  animation: orb-float 32s ease-in-out infinite;
-  animation-delay: 6s;
+  animation: orb-float 38s ease-in-out infinite;
+  animation-delay: 8s;
 }
 
 .orb-3 {
   width: 550px;
   height: 550px;
-  background: radial-gradient(circle at 50% 50%, #0099ff, transparent 70%);
-  bottom: -12%;
-  left: 8%;
-  animation: orb-float 35s ease-in-out infinite;
-  animation-delay: 12s;
+  background: radial-gradient(circle at 50% 50%, #b8a088, transparent 70%);
+  bottom: -5%;
+  left: 5%;
+  animation: orb-float 40s ease-in-out infinite;
+  animation-delay: 15s;
 }
 
 @keyframes orb-float {
   0%, 100% {
     transform: translate(0, 0) scale(1);
-    opacity: 0.2;
+    opacity: 0.15;
   }
   25% {
-    transform: translate(60px, -100px) scale(1.15);
-    opacity: 0.3;
+    transform: translate(50px, -80px) scale(1.1);
+    opacity: 0.2;
   }
   50% {
-    transform: translate(-40px, 80px) scale(1.1);
-    opacity: 0.25;
+    transform: translate(-60px, 70px) scale(1.15);
+    opacity: 0.18;
   }
   75% {
-    transform: translate(80px, -60px) scale(1.2);
-    opacity: 0.3;
+    transform: translate(70px, -50px) scale(1.1);
+    opacity: 0.2;
   }
 }
 
@@ -146,18 +156,18 @@ body::before {
   top: 0;
   width: 100%;
   z-index: 1000;
-  background: rgba(10, 14, 39, 0.5);
+  background: rgba(13, 13, 13, 0.5);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(0, 217, 255, 0.15);
+  border-bottom: 1px solid rgba(232, 220, 196, 0.1);
   padding: 20px 0;
   transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .navbar.scrolled {
-  background: rgba(10, 14, 39, 0.85);
+  background: rgba(13, 13, 13, 0.85);
   padding: 15px 0;
-  border-bottom-color: rgba(0, 217, 255, 0.25);
+  border-bottom-color: rgba(232, 220, 196, 0.2);
 }
 
 .nav-container {
@@ -266,19 +276,22 @@ body::before {
   font-size: 72px;
   font-weight: 700;
   margin-bottom: 20px;
-  line-height: 1.1;
+  line-height: 1.2;
   background: linear-gradient(135deg, var(--primary), var(--accent));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   animation: title-fade 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  letter-spacing: -2px;
+  letter-spacing: -1px;
   white-space: nowrap;
+  overflow: visible;
+  min-height: 80px;
 }
 
 .name-line {
   display: inline-block;
   white-space: nowrap;
+  overflow: visible;
 }
 
 @keyframes title-fade {
