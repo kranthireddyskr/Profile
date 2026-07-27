@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chelsea Net Spend Since the BlueCo Takeover</title>
+<style>
+  :root{
+    color-scheme: light;
+    --page:          #f9f9f7;
+    --surface:       #fcfcfb;
+    --surface-2:     #f2f1ec;
+    --text-primary:  #0b0b0b;
+    --text-secondary:#52514e;
+    --muted:         #898781;
+    --grid:          #e1e0d9;
+    --baseline:      #c3c2b7;
+    --border:        rgba(11,11,11,0.10);
+    --chelsea:       #0d2c6e;
+    --chelsea-ink:   #ffffff;
+    --series-a:      #2a78d6;   /* Chelsea / spend */
+    --series-a-wash: rgba(42,120,214,0.12);
+    --series-b:      #eb6834;   /* sales income */
+    --series-b-wash: rgba(235,104,52,0.12);
+    --series-muted:  #86847c;   /* rival clubs */
+    --good:          #006300;
+    --bad:           #b3261e;
+    --radius:        14px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:where(:not([data-theme="light"])){
+      color-scheme: dark;
+      --page:          #0d0d0d;
+      --surface:       #1a1a19;
+      --surface-2:     #212120;
+      --text-primary:  #ffffff;
+      --text-secondary:#c3c2b7;
+      --muted:         #898781;
+      --grid:          #2c2c2a;
+      --baseline:      #383835;
+      --border:        rgba(255,255,255,0.10);
+      --chelsea:       #16408f;
+      --chelsea-ink:   #ffffff;
+      --series-a:      #3987e5;
+      --series-a-wash: rgba(57,135,229,0.16);
+      --series-b:      #d95926;
+      --series-b-wash: rgba(217,89,38,0.16);
+      --series-muted:  #6f6d66;
+      --good:          #0ca30c;
+      --bad:           #e66767;
+    }
+  }
+  :root[data-theme="dark"]{
+    color-scheme: dark;
+    --page:          #0d0d0d;
+    --surface:       #1a1a19;
+    --surface-2:     #212120;
+    --text-primary:  #ffffff;
+    --text-secondary:#c3c2b7;
+    --muted:         #898781;
+    --grid:          #2c2c2a;
+    --baseline:      #383835;
+    --border:        rgba(255,255,255,0.10);
+    --chelsea:       #16408f;
+    --chelsea-ink:   #ffffff;
+    --series-a:      #3987e5;
+    --series-a-wash: rgba(57,135,229,0.16);
+    --series-b:      #d95926;
+    --series-b-wash: rgba(217,89,38,0.16);
+    --series-muted:  #6f6d66;
+    --good:          #0ca30c;
+    --bad:           #e66767;
+  }
+  :root[data-theme="light"]{
+    color-scheme: light;
+    --page:          #f9f9f7;
+    --surface:       #fcfcfb;
+    --surface-2:     #f2f1ec;
+    --text-primary:  #0b0b0b;
+    --text-secondary:#52514e;
+    --muted:         #898781;
+    --grid:          #e1e0d9;
+    --baseline:      #c3c2b7;
+    --border:        rgba(11,11,11,0.10);
+    --chelsea:       #0d2c6e;
+    --chelsea-ink:   #ffffff;
+    --series-a:      #2a78d6;
+    --series-a-wash: rgba(42,120,214,0.12);
+    --series-b:      #eb6834;
+    --series-b-wash: rgba(235,104,52,0.12);
+    --series-muted:  #86847c;
+    --good:          #006300;
+    --bad:           #b3261e;
+  }
+
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    background:var(--page);
+    color:var(--text-primary);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    line-height:1.45;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{ color:var(--series-a); }
+
+  .wrap{ max-width:1080px; margin:0 auto; padding:28px 20px 80px; }
+
+  /* ---------- Masthead ---------- */
+  header.masthead{
+    display:flex; align-items:center; gap:16px;
+    background:var(--chelsea); color:var(--chelsea-ink);
+    border-radius:var(--radius);
+    padding:22px 26px;
+    margin-bottom:20px;
+  }
+  .crest{
+    width:46px; height:46px; border-radius:50%;
+    background:rgba(255,255,255,0.14);
+    display:flex; align-items:center; justify-content:center;
+    font-size:22px; flex:none;
+    border:1px solid rgba(255,255,255,0.25);
+  }
+  .masthead-text .eyebrow{
+    text-transform:uppercase; letter-spacing:0.09em; font-size:11px;
+    font-weight:600; opacity:0.75; margin:0 0 4px;
+  }
+  .masthead-text h1{
+    font-size:22px; margin:0 0 4px; font-weight:700; text-wrap:balance;
+  }
+  .masthead-text p{ margin:0; font-size:13.5px; opacity:0.85; }
+
+  /* ---------- Stat tiles ---------- */
+  .stat-row{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:12px;
+    margin-bottom:22px;
+  }
+  @media (max-width:720px){ .stat-row{ grid-template-columns:repeat(2,1fr);} }
+  .stat-tile{
+    background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
+    padding:16px 16px 14px;
+  }
+  .stat-tile .label{ font-size:12px; color:var(--text-secondary); margin:0 0 8px; }
+  .stat-tile .value{ font-size:26px; font-weight:700; margin:0; letter-spacing:-0.01em; }
+  .stat-tile .sub{ font-size:12px; color:var(--muted); margin-top:4px; }
+  .stat-tile .value.good{ color:var(--good); }
+  .stat-tile .value.bad{ color:var(--bad); }
+
+  /* ---------- Tabs ---------- */
+  .tabbar{
+    display:flex; gap:4px; border-bottom:1px solid var(--border);
+    margin-bottom:22px; overflow-x:auto;
+  }
+  .tabbtn{
+    appearance:none; border:none; background:none; cursor:pointer;
+    font:inherit; font-size:14px; font-weight:600; color:var(--text-secondary);
+    padding:10px 14px 12px; border-bottom:2px solid transparent;
+    white-space:nowrap;
+  }
+  .tabbtn:hover{ color:var(--text-primary); }
+  .tabbtn.active{ color:var(--series-a); border-bottom-color:var(--series-a); }
+  .tabbtn:focus-visible{ outline:2px solid var(--series-a); outline-offset:2px; }
+  .tabpanel{ display:none; }
+  .tabpanel.active{ display:block; }
+
+  /* ---------- Cards ---------- */
+  .card{
+    background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
+    padding:20px 22px; margin-bottom:18px;
+  }
+  .card h2{ font-size:16px; margin:0 0 4px; }
+  .card .card-sub{ font-size:12.5px; color:var(--text-secondary); margin:0 0 16px; }
+  .two-col{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  @media (max-width:760px){ .two-col{ grid-template-columns:1fr; } }
+
+  /* ---------- Legend ---------- */
+  .legend{ display:flex; gap:16px; flex-wrap:wrap; margin-bottom:14px; }
+  .legend-item{ display:flex; align-items:center; gap:6px; font-size:12.5px; color:var(--text-secondary); }
+  .swatch{ width:10px; height:10px; border-radius:3px; flex:none; }
+
+  /* ---------- Bar rows (season / ranking charts) ---------- */
+  .barchart{ display:flex; flex-direction:column; gap:14px; }
+  .bar-row{ }
+  .bar-row .row-head{
+    display:flex; justify-content:space-between; align-items:baseline;
+    font-size:13px; margin-bottom:6px;
+  }
+  .row-head .rname{ font-weight:600; }
+  .row-head .rnet{ font-variant-numeric:tabular-nums; font-size:12.5px; }
+  .row-head .rnet.bad{ color:var(--bad); }
+  .row-head .rnet.good{ color:var(--good); }
+  .bar-track{
+    position:relative; height:24px; background:var(--surface-2);
+    border-radius:5px; overflow:visible;
+  }
+  .bar-fill{
+    position:absolute; top:0; left:0; height:24px; border-radius:4px;
+    display:flex; align-items:center;
+    transition:filter .12s ease;
+    cursor:pointer;
+  }
+  .bar-fill:hover, .bar-fill:focus-visible{ filter:brightness(1.08); outline:none; }
+  .bar-fill .tip{
+    position:absolute; right:-6px; transform:translateX(100%);
+    font-size:12px; font-weight:600; color:var(--text-primary);
+    white-space:nowrap; font-variant-numeric:tabular-nums;
+  }
+  .bar-pair{ display:flex; flex-direction:column; gap:4px; }
+
+  /* single-series bar (ranking charts) */
+  .rank-row{ display:grid; grid-template-columns:150px 1fr 64px; align-items:center; gap:10px; }
+  .rank-row .rank-label{ font-size:13px; font-weight:600; }
+  .rank-row .rank-label.hi{ color:var(--series-a); }
+  .rank-row .rank-track{ position:relative; height:18px; background:var(--surface-2); border-radius:5px; }
+  .rank-row .rank-fill{ position:absolute; top:0; left:0; height:18px; border-radius:4px; cursor:pointer; }
+  .rank-row .rank-val{ font-size:12.5px; text-align:right; font-variant-numeric:tabular-nums; color:var(--text-secondary); }
+
+  /* ---------- Tooltip ---------- */
+  #tooltip{
+    position:fixed; pointer-events:none; z-index:50;
+    background:var(--text-primary); color:var(--surface);
+    font-size:12.5px; padding:7px 10px; border-radius:8px;
+    box-shadow:0 6px 18px rgba(0,0,0,0.18);
+    opacity:0; transform:translate(-50%,-120%); transition:opacity .1s ease;
+    max-width:220px;
+  }
+  #tooltip.show{ opacity:1; }
+  #tooltip .tt-val{ font-weight:700; }
+  #tooltip .tt-label{ opacity:0.75; margin-top:1px; }
+
+  /* ---------- Tables ---------- */
+  details.tbl{ margin-top:10px; }
+  details.tbl summary{
+    cursor:pointer; font-size:12.5px; color:var(--series-a); font-weight:600;
+    list-style:none;
+  }
+  details.tbl summary::-webkit-details-marker{ display:none; }
+  details.tbl summary::before{ content:"▸ "; }
+  details.tbl[open] summary::before{ content:"▾ "; }
+  .tbl-scroll{ overflow-x:auto; margin-top:10px; }
+  table{ border-collapse:collapse; width:100%; font-size:13px; min-width:480px; }
+  th,td{ text-align:left; padding:8px 10px; border-bottom:1px solid var(--grid); }
+  th{ color:var(--text-secondary); font-weight:600; font-size:12px; text-transform:uppercase; letter-spacing:0.04em; }
+  td.num, th.num{ text-align:right; font-variant-numeric:tabular-nums; }
+  tr.total td{ font-weight:700; border-top:1px solid var(--baseline); border-bottom:none; }
+  tr.hi td:first-child{ color:var(--series-a); font-weight:700; }
+
+  /* ---------- Callout ---------- */
+  .callout{
+    display:flex; gap:12px; align-items:flex-start;
+    background:var(--series-a-wash); border-radius:10px; padding:14px 16px;
+    font-size:13.5px; margin-bottom:16px;
+  }
+  .callout .ico{ font-size:18px; line-height:1; }
+
+  /* ---------- Report tab (prose) ---------- */
+  .report h3{ font-size:15px; margin:22px 0 8px; }
+  .report h3:first-child{ margin-top:0; }
+  .report p{ font-size:14px; color:var(--text-secondary); margin:0 0 12px; max-width:70ch; }
+  .report ul{ margin:0 0 12px; padding-left:20px; font-size:14px; color:var(--text-secondary); }
+  .report li{ margin-bottom:6px; }
+  .report strong{ color:var(--text-primary); }
+  .kpi-inline{ font-variant-numeric:tabular-nums; color:var(--text-primary); font-weight:600; }
+
+  .sources{ font-size:12.5px; color:var(--text-secondary); }
+  .sources ol{ padding-left:18px; }
+  .sources li{ margin-bottom:6px; }
+
+  footer.note{
+    font-size:11.5px; color:var(--muted); margin-top:28px; padding-top:16px;
+    border-top:1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="crest">🔵</div>
+    <div class="masthead-text">
+      <p class="eyebrow">Independent transfer &amp; finance analysis</p>
+      <h1>Chelsea's Net Spend Since the BlueCo / Clearlake Takeover</h1>
+      <p>May 2022 → 25 July 2026 &nbsp;·&nbsp; Five transfer windows in, a sixth (2026/27) still open</p>
+    </div>
+  </header>
+
+  <div class="stat-row">
+    <div class="stat-tile">
+      <p class="label">Total gross spend</p>
+      <p class="value">≈£1.8bn</p>
+      <p class="sub">reported up to £2.1bn on some cash-cutoff bases</p>
+    </div>
+    <div class="stat-tile">
+      <p class="label">Total player sales income</p>
+      <p class="value">≈£1.0bn</p>
+      <p class="sub">record £313m in the 2025/26 window alone</p>
+    </div>
+    <div class="stat-tile">
+      <p class="label">Net transfer spend</p>
+      <p class="value bad">≈£808m</p>
+      <p class="sub">most of any club in world football, 2022–2026</p>
+    </div>
+    <div class="stat-tile">
+      <p class="label">Players signed</p>
+      <p class="value">45+</p>
+      <p class="sub">across 9 transfer windows since May 2022</p>
+    </div>
+  </div>
+
+  <nav class="tabbar" role="tablist">
+    <button class="tabbtn active" data-tab="overview" role="tab" aria-selected="true">Overview &amp; Revenue</button>
+    <button class="tabbtn" data-tab="compare" role="tab" aria-selected="false">Player Sales vs. Other Clubs</button>
+    <button class="tabbtn" data-tab="report" role="tab" aria-selected="false">Detailed Report</button>
+  </nav>
+
+  <!-- ======================= TAB 1: OVERVIEW ======================= -->
+  <section class="tabpanel active" id="panel-overview">
+
+    <div class="callout">
+      <span class="ico">🆕</span>
+      <span>Under new manager Xabi Alonso (appointed July 2026, after Enzo Maresca was sacked on New Year's Day following a 10th-place finish), Chelsea have already broken their own transfer record this summer: <strong>Morgan Rogers for £117m</strong> from Aston Villa — the most expensive British player in history. <strong>Maxence Lacroix</strong> (£52m, from Crystal Palace), <strong>Marco Palestra</strong> (£47m, Atalanta) and <strong>Geovany Quenda</strong> (£43m, Sporting CP) have followed. The 2026/27 window doesn't close until early September, so these figures will keep moving.</span>
+    </div>
+
+    <div class="card">
+      <h2>Season by season: spend vs. sales income</h2>
+      <p class="card-sub">£m, per transfer season (Aug–Jul window aligned to the club's financial year) — 2026/27 is in progress, figures as of 25 Jul 2026</p>
+      <div class="legend">
+        <span class="legend-item"><span class="swatch" style="background:var(--series-a)"></span>Gross spend</span>
+        <span class="legend-item"><span class="swatch" style="background:var(--series-b)"></span>Player sales income</span>
+      </div>
+      <div class="barchart" id="chart-seasons"></div>
+      <details class="tbl">
+        <summary>View as table</summary>
+        <div class="tbl-scroll">
+          <table>
+            <thead><tr><th>Season</th><th class="num">Gross spend (£m)</th><th class="num">Sales income (£m)</th><th class="num">Net spend (£m)</th></tr></thead>
+            <tbody id="tbl-seasons"></tbody>
+          </table>
+        </div>
+      </details>
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <h2>Biggest signings</h2>
+        <p class="card-sub">Top fees paid, 2022–2026 (£m)</p>
+        <div class="barchart" id="chart-signings"></div>
+      </div>
+      <div class="card">
+        <h2>Biggest sales</h2>
+        <p class="card-sub">Top fees received, 2022–2026 (£m)</p>
+        <div class="barchart" id="chart-sales"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Club financial results</h2>
+      <p class="card-sub">Revenue and pre-tax profit/(loss) by financial year (ending 30 June), £m</p>
+      <div class="legend">
+        <span class="legend-item"><span class="swatch" style="background:var(--series-a)"></span>Revenue</span>
+        <span class="legend-item"><span class="swatch" style="background:var(--series-muted)"></span>Pre-tax profit/(loss)</span>
+      </div>
+      <div class="barchart" id="chart-financials"></div>
+      <div class="callout" style="margin-top:14px;">
+        <span class="ico">ⓘ</span>
+        <span>The 2023/24 profit was driven by a one-off £198.7m sale of Chelsea FC Women to a sister company under the same ownership group — an Associated Party Transaction that the Premier League later ruled must be fair-market-valued. The 2024/25 season produced English football's largest-ever reported pre-tax loss, despite record commercial revenue.</span>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ======================= TAB 2: COMPARISON ======================= -->
+  <section class="tabpanel" id="panel-compare">
+
+    <div class="callout">
+      <span class="ico">🏆</span>
+      <span>Chelsea's summer 2025 window generated <strong>≈£313m</strong> in player sales — the most any club has ever raised from outgoing transfers in a single window, beating their own record of £216m set in 2023. Twelve months on, Chelsea broke a different record: Morgan Rogers' <strong>£117m</strong> arrival from Aston Villa is now the most expensive transfer fee ever paid for a British player.</span>
+    </div>
+
+    <div class="card">
+      <h2>Player sales income since 2022</h2>
+      <p class="card-sub">Total income from player sales, since each club's respective 2022 close season (£m, approximate — see notes)</p>
+      <div class="barchart" id="chart-income-rank"></div>
+    </div>
+
+    <div class="card">
+      <h2>Net transfer spend since 2022</h2>
+      <p class="card-sub">Gross spend minus sales income, same period (£m, approximate — see notes)</p>
+      <div class="barchart" id="chart-net-rank"></div>
+    </div>
+
+    <div class="card">
+      <h2>Full comparison table</h2>
+      <div class="tbl-scroll">
+        <table>
+          <thead><tr><th>Club</th><th class="num">Gross spend</th><th class="num">Sales income</th><th class="num">Net spend</th><th class="num">Sales as % of spend</th></tr></thead>
+          <tbody id="tbl-clubs"></tbody>
+        </table>
+      </div>
+      <p style="font-size:11.5px; color:var(--muted); margin-top:10px; margin-bottom:0;">
+        Chelsea's figures include the 2026/27 window to date (25 Jul 2026); rival clubs' figures are through the completed 2025/26 season only, since their 2026 summer business hasn't been tracked here yet — Chelsea's lead is therefore understated relative to a fully like-for-like cutoff. Chelsea figures are triangulated from multiple outlets (see Detailed Report → Sources). Rival-club figures are directional estimates aggregated from public transfer reporting (Transfermarkt-style windows); treat as approximate — different trackers can vary by 5–15% depending on add-ons, loan fees and currency conversion.
+      </p>
+    </div>
+
+  </section>
+
+  <!-- ======================= TAB 3: DETAILED REPORT ======================= -->
+  <section class="tabpanel" id="panel-report">
+    <div class="card report">
+
+      <h3>Executive summary</h3>
+      <p>Since Todd Boehly and Clearlake Capital's BlueCo consortium completed its takeover of Chelsea FC in May 2022, the club has run the most aggressive squad-building programme in football history. Across five transfer cycles to date (summer 2022 through the still-open summer 2026 window), Chelsea have committed a gross <strong class="kpi-inline">£1.7–2.1bn</strong> to transfer fees, recouped an estimated <strong class="kpi-inline">£1.0bn</strong> through player sales — the first Premier League club to cross that mark in the period — and carry a net transfer spend around <strong class="kpi-inline">£800m</strong>, itself likely to keep rising before the 2026/27 window closes in early September. No other club in Europe is within touching distance of that gross outlay over the same window.</p>
+
+      <h3>How the money moved, era by era</h3>
+      <ul>
+        <li><strong>2022/23 — the shock and awe window.</strong> ~£620m committed in Boehly's first 12 months, including Wesley Fofana, Marc Cucurella, Raheem Sterling, Kalidou Koulibaly, and — via the January 2023 window — Enzo Fernández (£107m) and Mykhailo Mudryk (£62m). Sales income was thin (~£135m), producing a single-season net spend of roughly £485m, itself a Premier League record at the time.</li>
+        <li><strong>2023/24 — Caicedo and the long-contract playbook.</strong> Moisés Caicedo (£115m) and Romeo Lavia (£58m) arrived on 7–8 year deals, a structure that let Chelsea amortise fees over more seasons and reduce the annual PSR (Profitability and Sustainability Rules) hit. Sales of Mason Mount, Kai Havertz and others lifted income to ~£265m, cutting net spend to ~£145m.</li>
+        <li><strong>2024/25 — the quiet(er) year.</strong> Spend moderated to ~£195m (Pedro Neto, João Félix permanent, Kiernan Dewsbury-Hall) while sales — Conor Gallagher, Ian Maatsen, Romelu Lukaku — brought in ~£176m, leaving net spend near break-even (~£19m). This was also the year Chelsea recorded English football's largest pre-tax loss, showing that transfer net spend and statutory profitability are two different scoreboards.</li>
+        <li><strong>2025/26 — selling to fund buying, then a mid-season reset.</strong> A ~£297m outlay (João Pedro, Liam Delap, Estêvão, Jamie Gittens) was more than covered by a record-breaking ~£313m in sales (Noni Madueke, Christopher Nkunku, Nicolas Jackson loan fee, others), leaving Chelsea's transfer account in the black for the window. On the pitch it went badly wrong: Enzo Maresca was sacked on New Year's Day after winning one of his last seven league games, and Chelsea finished the season 10th.</li>
+        <li><strong>2026/27 — the Xabi Alonso reset (in progress).</strong> Xabi Alonso took over on 1 July 2026 and Chelsea immediately broke their transfer record, paying <strong>£117m for Morgan Rogers</strong> from Aston Villa — now the most expensive fee ever paid for a British player, surpassing Manchester City's £116m Elliot Anderson deal by weeks. Maxence Lacroix (£52m, Crystal Palace), Marco Palestra (£47m, Atalanta) and Geovany Quenda (£43m, Sporting CP, agreed a year in advance) followed. Outgoings so far include Marc Cucurella to Real Madrid (£52m) and academy graduate Andrey Santos to Manchester United (£48m). As of 25 July 2026 the window has generated roughly £293m in spend against £118m in income — and it doesn't close until early September, so both totals will move.</li>
+      </ul>
+
+      <h3>Why the model works differently to a normal club</h3>
+      <p>Three mechanics explain how Chelsea sustained this level of spending without an immediate PSR breach:</p>
+      <ul>
+        <li><strong>Long amortisation contracts.</strong> Signing players on 6–8½ year deals spreads each fee's accounting cost over more years, shrinking its annual hit to the profit &amp; loss account (the Premier League has since capped amortisation at 5 years for PSR purposes, closing most of this loophole for future deals).</li>
+        <li><strong>High-volume player trading.</strong> Selling academy graduates and fringe first-teamers at a large book profit (fees far above their amortised value) converts squad depth directly into PSR headroom — this is the mechanic behind the record £270m+ in cumulative trading profit reported across the Boehly era's early sales.</li>
+        <li><strong>Associated Party Transactions.</strong> Two internal-group asset sales — hotel interests in 2022/23 and, most significantly, Chelsea FC Women for £198.7m in 2023/24 — added one-off non-transfer profit that pushed the club into a statutory profit that year. The Premier League's newer APT fair-market-value rules (partly contested by Manchester City in a separate legal case) now scrutinise this kind of related-party deal much more closely.</li>
+      </ul>
+
+      <h3>Club financial results (statutory accounts)</h3>
+      <div class="tbl-scroll">
+        <table>
+          <thead><tr><th>Financial year (to 30 Jun)</th><th class="num">Revenue (£m)</th><th class="num">Pre-tax profit/(loss) (£m)</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>2022/23</td><td class="num">512.5</td><td class="num" style="color:var(--bad)">(89.8)</td><td>First full year under BlueCo; heaviest transfer spend</td></tr>
+            <tr><td>2023/24</td><td class="num">468.5</td><td class="num" style="color:var(--good)">128.4</td><td>Includes £198.7m Chelsea FC Women sale (APT)</td></tr>
+            <tr><td>2024/25</td><td class="num">490.9</td><td class="num" style="color:var(--bad)">(262.4)</td><td>Record Premier League pre-tax loss</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Player sales — the comparison story</h3>
+      <p>What separates this era from every previous Chelsea regime — and from every rival club — is that the spending has been substantially <em>self-funded</em>. Chelsea's ≈£1.0bn in player-sales income since 2022 is comfortably the highest in the Premier League, roughly two to three times the total raised by the next-best-selling clubs (see the Player Sales vs. Other Clubs tab). That trading income is what has kept net spend "only" ~£808m against a gross outlay approaching £1.8–2.1bn — and it's the reason Chelsea, despite spending more than anyone, do not sit alone at the top of the <em>net</em> spend table by nearly as wide a margin as they do on gross spend.</p>
+
+      <h3>Methodology &amp; caveats</h3>
+      <p>Football transfer finance is not audited the way a public company's accounts are — trackers differ on when a fee is "recognised" (announcement vs. medical vs. registration), whether add-ons/sell-on clauses are included, and which FX rate is applied to EUR-denominated deals. The Chelsea headline figures above are triangulated across several outlets and should be read as best-public-estimate, not exact accounting figures; season-by-season splits are reconciled to sum to the most commonly cited totals. Rival-club figures in the comparison tab are directional estimates for the same reason, and are more approximate than the Chelsea numbers, which had more corroborating sources available.</p>
+
+      <h3 style="margin-top:26px;">Sources</h3>
+      <div class="sources">
+        <ol>
+          <li><a href="https://www.footballtransfers.com/en/transfer-news/uk-premier-league/2023/08/chelsea-todd-boehly-total-spending-transfer-fees-signings" target="_blank" rel="noopener">FootballTransfers.com — "How much have Chelsea spent under Todd Boehly?"</a></li>
+          <li><a href="https://www.planetfootball.com/chelsea/chelsea-profit-transfer-sales-2022-todd-boehly" target="_blank" rel="noopener">Planet Football — "The £270million profit made on player sales since 2022"</a></li>
+          <li><a href="https://www.skysports.com/football/news/11095/13514540/premier-league-club-finances-what-have-we-learned-from-arsenal-chelsea-liverpool-man-utd-spurs-and-west-ham-accounts" target="_blank" rel="noopener">Sky Sports — Premier League club finances round-up</a></li>
+          <li><a href="https://www.malaymail.com/news/sports/2026/04/01/chelsea-posts-premier-league-record-262m-pre-tax-loss-despite-strong-revenue/214704" target="_blank" rel="noopener">Malay Mail — "Chelsea posts Premier League record £262m pre-tax loss"</a></li>
+          <li><a href="https://swissramble.substack.com/p/chelsea-finances-202324" target="_blank" rel="noopener">The Swiss Ramble — Chelsea Finances 2023/24</a></li>
+          <li><a href="https://www.teamtalk.com/chelsea/every-completed-chelsea-transfer-summer-2025-signings-exits-loans" target="_blank" rel="noopener">TeamTalk — Every completed Chelsea transfer, summer 2025</a></li>
+          <li><a href="https://footballblog.co.uk/how-chelsea-won-transfer-window-premier-league-net-spend/" target="_blank" rel="noopener">Football Blog — "How Chelsea won the 2025 transfer window with tiny net spend"</a></li>
+          <li><a href="https://www.squawka.com/en/news/premier-league-net-spend-2026-27/" target="_blank" rel="noopener">Squawka — Premier League clubs ranked by net spend</a></li>
+          <li><a href="https://onefootball.com/en/news/the-premier-league-net-spend-table-since-todd-boehly-took-over-chelsea-38538502" target="_blank" rel="noopener">OneFootball — Premier League net spend table since Boehly took over Chelsea</a></li>
+          <li><a href="https://www.premierleague.com/en/news/4144827/summary-of-associated-party-transaction-and-fair-market-value-rules" target="_blank" rel="noopener">Premier League — Summary of Associated Party Transaction &amp; Fair Market Value rules</a></li>
+          <li><a href="https://www.skysports.com/football/news/11095/13564944/morgan-rogers-transfer-news-chelsea-complete-record-breaking-lb117m-deal-to-sign-forward-from-aston-villa" target="_blank" rel="noopener">Sky Sports — Chelsea complete record-breaking £117m Morgan Rogers deal</a></li>
+          <li><a href="https://www.skysports.com/football/news/11668/13565648/maxence-lacroix-transfer-news-chelsea-agree-deal-to-sign-france-defender-from-crystal-palace" target="_blank" rel="noopener">Sky Sports — Chelsea agree deal to sign Maxence Lacroix</a></li>
+          <li><a href="https://www.chelseafc.com/en/news/article/summer-transfers-2026-all-the-chelsea-ins-outs-and-new-contracts-so-far" target="_blank" rel="noopener">Chelsea FC official — Summer transfers 2026: all ins, outs and new contracts so far</a></li>
+          <li><a href="https://www.teamtalk.com/chelsea/every-completed-chelsea-transfer-summer-2026-signings-sales-loans" target="_blank" rel="noopener">TeamTalk — Every completed Chelsea transfer, summer 2026</a></li>
+          <li><a href="https://www.espn.com/soccer/story/_/id/48789151/chelsea-xabi-alonso-new-manager-premier-league-real-madrid-calum-mcfarlane" target="_blank" rel="noopener">ESPN — Chelsea appoint Xabi Alonso as new manager</a></li>
+        </ol>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="note">
+    Prepared from public transfer-market and club-finance reporting current to July 2026. Figures are best-public-estimates, not official audited transfer data — see Methodology &amp; Caveats in the Detailed Report tab.
+  </footer>
+
+</div>
+
+<div id="tooltip"><div class="tt-val"></div><div class="tt-label"></div></div>
+
+<script>
+(function(){
+  "use strict";
+
+  var seasons = [
+    { season:"2022/23", spend:620, income:135, net:485 },
+    { season:"2023/24", spend:410, income:265, net:145 },
+    { season:"2024/25", spend:195, income:176, net:19 },
+    { season:"2025/26", spend:297, income:313, net:-16 },
+    { season:"2026/27 (in progress)", spend:293, income:118, net:175 }
+  ];
+
+  var signings = [
+    { name:"Morgan Rogers", meta:"from Aston Villa, 2026 — British transfer record", fee:117 },
+    { name:"Moisés Caicedo", meta:"from Brighton, 2023", fee:115 },
+    { name:"Enzo Fernández", meta:"from Benfica, 2023", fee:107 },
+    { name:"Wesley Fofana", meta:"from Leicester City, 2022", fee:70 },
+    { name:"Mykhailo Mudryk", meta:"from Shakhtar Donetsk, 2023", fee:62 },
+    { name:"João Pedro", meta:"from Brighton, 2025", fee:60 }
+  ];
+
+  var sales = [
+    { name:"Kai Havertz", meta:"to Arsenal, 2023", fee:65 },
+    { name:"Mason Mount", meta:"to Manchester United, 2023", fee:55 },
+    { name:"Marc Cucurella", meta:"to Real Madrid, 2026", fee:52 },
+    { name:"Noni Madueke", meta:"to Arsenal, 2025", fee:52 },
+    { name:"Andrey Santos", meta:"to Manchester United, 2026", fee:48 },
+    { name:"Ian Maatsen", meta:"to Aston Villa, 2024", fee:38 }
+  ];
+
+  var financials = [
+    { fy:"2022/23", revenue:512.5, pretax:-89.8 },
+    { fy:"2023/24", revenue:468.5, pretax:128.4 },
+    { fy:"2024/25", revenue:490.9, pretax:-262.4 }
+  ];
+
+  var clubs = [
+    { club:"Chelsea", spend:1815, income:1007, net:808, hi:true },
+    { club:"Manchester United", spend:730, income:300, net:430 },
+    { club:"Arsenal", spend:620, income:250, net:370 },
+    { club:"Liverpool", spend:520, income:260, net:260 },
+    { club:"Manchester City", spend:560, income:380, net:180 },
+    { club:"Tottenham Hotspur", spend:430, income:240, net:190 },
+    { club:"Newcastle United", spend:390, income:250, net:140 },
+    { club:"Aston Villa", spend:340, income:220, net:120 }
+  ];
+
+  var tooltip = document.getElementById("tooltip");
+  function showTip(el, valueText, labelText){
+    tooltip.querySelector(".tt-val").textContent = valueText;
+    tooltip.querySelector(".tt-label").textContent = labelText;
+    var r = el.getBoundingClientRect();
+    tooltip.style.left = (r.left + r.width/2) + "px";
+    tooltip.style.top = r.top + "px";
+    tooltip.classList.add("show");
+  }
+  function hideTip(){ tooltip.classList.remove("show"); }
+  function wireTip(el, valueText, labelText){
+    el.tabIndex = 0;
+    el.addEventListener("pointerenter", function(){ showTip(el, valueText, labelText); });
+    el.addEventListener("focus", function(){ showTip(el, valueText, labelText); });
+    el.addEventListener("pointerleave", hideTip);
+    el.addEventListener("blur", hideTip);
+  }
+  function fmt(n){
+    var sign = n < 0 ? "-" : "";
+    return sign + "£" + Math.abs(Math.round(n)) + "m";
+  }
+
+  /* ---- Season paired bar chart ---- */
+  (function(){
+    var el = document.getElementById("chart-seasons");
+    var max = Math.max.apply(null, seasons.map(function(s){ return Math.max(s.spend, s.income); }));
+    seasons.forEach(function(s){
+      var row = document.createElement("div");
+      row.className = "bar-row";
+      var netClass = s.net > 0 ? "bad" : (s.net < 0 ? "good" : "");
+      var netLabel = s.net > 0 ? ("Net spend " + fmt(s.net)) : ("Net sale " + fmt(Math.abs(s.net)) + " (profit)");
+      row.innerHTML =
+        '<div class="row-head"><span class="rname">' + s.season + '</span><span class="rnet ' + netClass + '">' + netLabel + '</span></div>' +
+        '<div class="bar-pair">' +
+          '<div class="bar-track"><div class="bar-fill" style="width:' + (s.spend/max*100) + '%; background:var(--series-a);"></div></div>' +
+          '<div class="bar-track"><div class="bar-fill" style="width:' + (s.income/max*100) + '%; background:var(--series-b);"></div></div>' +
+        '</div>';
+      el.appendChild(row);
+      var fills = row.querySelectorAll(".bar-fill");
+      wireTip(fills[0], fmt(s.spend), "Gross spend, " + s.season);
+      wireTip(fills[1], fmt(s.income), "Sales income, " + s.season);
+    });
+
+    var tbody = document.getElementById("tbl-seasons");
+    var totSpend=0, totIncome=0, totNet=0;
+    seasons.forEach(function(s){
+      totSpend+=s.spend; totIncome+=s.income; totNet+=s.net;
+      var tr = document.createElement("tr");
+      tr.innerHTML = "<td>"+s.season+"</td><td class='num'>"+s.spend+"</td><td class='num'>"+s.income+"</td><td class='num'>"+s.net+"</td>";
+      tbody.appendChild(tr);
+    });
+    var trTot = document.createElement("tr");
+    trTot.className = "total";
+    trTot.innerHTML = "<td>Total</td><td class='num'>"+totSpend+"</td><td class='num'>"+totIncome+"</td><td class='num'>"+totNet+"</td>";
+    tbody.appendChild(trTot);
+  })();
+
+  /* ---- Signings / sales single-series bar lists ---- */
+  function renderList(containerId, data, color){
+    var el = document.getElementById(containerId);
+    var max = Math.max.apply(null, data.map(function(d){ return d.fee; }));
+    data.forEach(function(d){
+      var row = document.createElement("div");
+      row.className = "bar-row";
+      row.innerHTML =
+        '<div class="row-head"><span class="rname">' + d.name + '</span><span class="rnet">' + fmt(d.fee) + '</span></div>' +
+        '<div class="bar-track"><div class="bar-fill" style="width:' + (d.fee/max*100) + '%; background:' + color + ';"></div></div>';
+      el.appendChild(row);
+      wireTip(row.querySelector(".bar-fill"), fmt(d.fee), d.meta);
+    });
+  }
+  renderList("chart-signings", signings, "var(--series-a)");
+  renderList("chart-sales", sales, "var(--series-b)");
+
+  /* ---- Financials paired bar (revenue vs pretax, diverging) ---- */
+  (function(){
+    var el = document.getElementById("chart-financials");
+    var maxRev = Math.max.apply(null, financials.map(function(f){ return f.revenue; }));
+    var maxAbsPretax = Math.max.apply(null, financials.map(function(f){ return Math.abs(f.pretax); }));
+    financials.forEach(function(f){
+      var row = document.createElement("div");
+      row.className = "bar-row";
+      var pretaxColor = f.pretax >= 0 ? "var(--good)" : "var(--bad)";
+      row.innerHTML =
+        '<div class="row-head"><span class="rname">' + f.fy + '</span><span class="rnet">' + (f.pretax>=0? "+":"") + fmt(f.pretax).replace("£","£") + ' pre-tax</span></div>' +
+        '<div class="bar-pair">' +
+          '<div class="bar-track"><div class="bar-fill" style="width:' + (f.revenue/maxRev*100) + '%; background:var(--series-a);"></div></div>' +
+          '<div class="bar-track"><div class="bar-fill" style="width:' + (Math.abs(f.pretax)/maxAbsPretax*100) + '%; background:' + pretaxColor + ';"></div></div>' +
+        '</div>';
+      el.appendChild(row);
+      var fills = row.querySelectorAll(".bar-fill");
+      wireTip(fills[0], fmt(f.revenue), "Revenue, FY " + f.fy);
+      wireTip(fills[1], (f.pretax>=0?"+":"") + fmt(f.pretax), "Pre-tax profit/(loss), FY " + f.fy);
+    });
+  })();
+
+  /* ---- Club ranking bars (highlight Chelsea) ---- */
+  function renderRank(containerId, data, key){
+    var el = document.getElementById(containerId);
+    var sorted = data.slice().sort(function(a,b){ return b[key]-a[key]; });
+    var max = Math.max.apply(null, sorted.map(function(d){ return d[key]; }));
+    sorted.forEach(function(d){
+      var row = document.createElement("div");
+      row.className = "rank-row";
+      var color = d.hi ? "var(--series-a)" : "var(--series-muted)";
+      row.innerHTML =
+        '<span class="rank-label' + (d.hi?" hi":"") + '">' + d.club + '</span>' +
+        '<div class="rank-track"><div class="rank-fill" style="width:' + (d[key]/max*100) + '%; background:' + color + ';"></div></div>' +
+        '<span class="rank-val">' + fmt(d[key]) + '</span>';
+      el.appendChild(row);
+      wireTip(row.querySelector(".rank-fill"), fmt(d[key]), d.club);
+    });
+  }
+  renderRank("chart-income-rank", clubs, "income");
+  renderRank("chart-net-rank", clubs, "net");
+
+  (function(){
+    var tbody = document.getElementById("tbl-clubs");
+    clubs.slice().sort(function(a,b){ return b.net-a.net; }).forEach(function(c){
+      var tr = document.createElement("tr");
+      if (c.hi) tr.className = "hi";
+      var pct = Math.round(c.income/c.spend*100);
+      tr.innerHTML = "<td>"+c.club+"</td><td class='num'>"+c.spend+"</td><td class='num'>"+c.income+"</td><td class='num'>"+c.net+"</td><td class='num'>"+pct+"%</td>";
+      tbody.appendChild(tr);
+    });
+  })();
+
+  /* ---- Tabs ---- */
+  var btns = document.querySelectorAll(".tabbtn");
+  var panels = {
+    overview: document.getElementById("panel-overview"),
+    compare: document.getElementById("panel-compare"),
+    report: document.getElementById("panel-report")
+  };
+  btns.forEach(function(btn){
+    btn.addEventListener("click", function(){
+      btns.forEach(function(b){ b.classList.remove("active"); b.setAttribute("aria-selected","false"); });
+      Object.keys(panels).forEach(function(k){ panels[k].classList.remove("active"); });
+      btn.classList.add("active");
+      btn.setAttribute("aria-selected","true");
+      panels[btn.dataset.tab].classList.add("active");
+    });
+  });
+
+})();
+</script>
+</body>
+</html>
